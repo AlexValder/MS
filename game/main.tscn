@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c68ad8q0qdqmu"]
+
+[ext_resource type="Texture2D" uid="uid://d16w4tfrc5s21" path="res://icon.svg" id="1_x8j47"]
+
+[sub_resource type="GDScript" id="GDScript_muyll"]
+script/source = "extends GDExample
+
+
+func _on_position_changed(node, new_pos):
+    print(\"The position of \" + node.get_class() + \" is now \" + str(new_pos))
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GDExample" type="MovingSprite2D" parent="."]
+amplitude = 50.0
+speed = 5.0
+position = Vector2(40.0386, 79.6577)
+texture = ExtResource("1_x8j47")
+centered = false
+script = SubResource("GDScript_muyll")

@@ -1,0 +1,22 @@
+{
+    "files.exclude": {
+        ".sconsign.dblite": true,
+        "cpp/**/*.obj": true,
+        "game/.godot": true,
+        "game/bin/*windows.template_*": true,
+        "godot-cpp/": true
+    },
+    "files.autoGuessEncoding": true,
+    "files.autoSaveWhenNoErrors": true,
+    "files.autoSave": "onFocusChange",
+    "files.insertFinalNewline": true,
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.autoSaveWorkspaceFilesOnly": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "prettier.tabWidth": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+}
