@@ -1,6 +1,6 @@
 #include "register_types.hh"
 
-#include "levels/inc/level3d.hh"
+#include "levels/level3d.hh"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>

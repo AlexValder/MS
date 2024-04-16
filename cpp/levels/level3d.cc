@@ -1,4 +1,4 @@
-#include "../inc/level3d.hh"
+#include "level3d.hh"
 
 #include <godot_cpp/core/class_db.hpp>
 #include <stdio.h>

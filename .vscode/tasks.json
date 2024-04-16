@@ -10,7 +10,7 @@
             "command": "scons",
             "args": [
                 // enable for debugging with breakpoints
-                "dev_build=yes",
+                //"dev_build=yes",
             ],
             "problemMatcher": "$msCompile"
         }
