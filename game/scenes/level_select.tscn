@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://c68ad8q0qdqmu"]
+
+[ext_resource type="Script" path="res://scenes/level_select.gd" id="1_aw8vy"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcfqr"]
+load_path = "res://.godot/imported/icons.png-9638851efbee5517d4b4cd55f414e20f.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yvkb"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_lcfqr")
+region = Rect2(9, 10, 29, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tbut"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_lcfqr")
+region = Rect2(201, 42, 29, 28)
+
+[node name="level_select" type="Node"]
+script = ExtResource("1_aw8vy")
+
+[node name="center" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="levels" type="GridContainer" parent="center"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="mcont" type="HFlowContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -921.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="settings" type="Button" parent="mcont"]
+visible = false
+texture_filter = 1
+clip_contents = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+tooltip_text = "Settings"
+disabled = true
+toggle_mode = true
+expand_icon = true
+
+[node name="texture" type="TextureRect" parent="mcont/settings"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_5yvkb")
+
+[node name="exit" type="Button" parent="mcont"]
+texture_filter = 1
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Settings"
+
+[node name="texture" type="TextureRect" parent="mcont/exit"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_0tbut")
+
+[connection signal="button_up" from="mcont/exit" to="." method="_on_exit_button_up"]

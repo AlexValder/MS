@@ -18,6 +18,11 @@ sources = []
 for dir, _, _ in os.walk(sourcesDir):
     sources.extend(Glob(os.path.join(dir, "*.cc")))
 
+print()
+for s in sources:
+    print(s)
+print()
+
 libname = "libgame"
 
 library = env.SharedLibrary(

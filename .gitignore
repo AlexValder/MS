@@ -47,6 +47,9 @@ mono_crash.*.json
 *.out
 *.app
 
+# Extra
+*.pdb
 *.exp
 /.sconsign.dblite
 /extension_api.json
+/game/bin/*.ilk

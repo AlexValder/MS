@@ -1,6 +1,6 @@
 #include "register_types.hh"
 
-#include "types/inc/moving_sprite_2d.hh"
+#include "levels/inc/level3d.hh"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -13,7 +13,7 @@ void initialize_module(godot::ModuleInitializationLevel p_level)
         return;
     }
 
-    godot::ClassDB::register_class<godot::avalder::MovingSprite2D>();
+    godot::ClassDB::register_class<godot::avalder::Level3D>();
 }
 
 void uninitialize_module(godot::ModuleInitializationLevel p_level)
