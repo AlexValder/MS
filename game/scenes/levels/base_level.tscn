@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://cu33xh01v40ou"]
+
+[ext_resource type="Script" path="res://scenes/levels/base_level.gd" id="1_unele"]
+[ext_resource type="PackedScene" uid="uid://batlms262xfw8" path="res://scenes/chars/player/player.tscn" id="2_1pxv4"]
+[ext_resource type="Script" path="res://scenes/levels/level_metadata.gd" id="2_sf5q7"]
+
+[sub_resource type="Resource" id="Resource_u1mox"]
+script = ExtResource("2_sf5q7")
+level_name = "Level"
+time = 0
+weather = 0
+path = ""
+
+[sub_resource type="QuadMesh" id="QuadMesh_tl7p3"]
+size = Vector2(50, 50)
+
+[sub_resource type="Gradient" id="Gradient_8esf0"]
+colors = PackedColorArray(0, 0.508978, 0.180747, 1, 0, 0.324013, 0.136674, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_75qbj"]
+noise_type = 2
+frequency = 0.0726
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_emgjr"]
+width = 256
+height = 256
+color_ramp = SubResource("Gradient_8esf0")
+noise = SubResource("FastNoiseLite_75qbj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lhqd"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("NoiseTexture2D_emgjr")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n7acl"]
+data = PackedVector3Array(25, -25, 0, -25, -25, 0, 25, 25, 0, -25, -25, 0, -25, 25, 0, 25, 25, 0)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t2qm0"]
+sky_top_color = Color(0.522136, 0.388361, 0.582492, 1)
+sky_horizon_color = Color(0.98996, 0.444196, 0.622475, 1)
+sky_curve = 0.0337968
+ground_bottom_color = Color(0, 0.356863, 0, 1)
+ground_horizon_color = Color(0.988235, 0.443137, 0.623529, 1)
+
+[sub_resource type="Sky" id="Sky_vids4"]
+sky_material = SubResource("ProceduralSkyMaterial_t2qm0")
+
+[sub_resource type="Environment" id="Environment_24ylp"]
+background_mode = 2
+sky = SubResource("Sky_vids4")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.64
+reflected_light_source = 2
+tonemap_mode = 2
+adjustment_saturation = 0.35
+
+[node name="level" type="Level3D"]
+level_name = "Level"
+geometry_path = NodePath("geom")
+player_spawn_point = NodePath("player")
+script = ExtResource("1_unele")
+level_metadata = SubResource("Resource_u1mox")
+
+[node name="geom" type="Node3D" parent="."]
+
+[node name="floor" type="MeshInstance3D" parent="geom"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_tl7p3")
+surface_material_override/0 = SubResource("StandardMaterial3D_3lhqd")
+
+[node name="static" type="StaticBody3D" parent="geom/floor"]
+
+[node name="shape" type="CollisionShape3D" parent="geom/floor/static"]
+shape = SubResource("ConcavePolygonShape3D_n7acl")
+
+[node name="sun" type="DirectionalLight3D" parent="geom"]
+transform = Transform3D(0.968895, 0.236742, 0.0720813, 0, -0.29127, 0.956641, 0.247473, -0.926885, -0.28221, 0, -11.1937, 0)
+light_color = Color(0.944564, 0.659952, 0.810971, 1)
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="player" parent="." instance=ExtResource("2_1pxv4")]
+
+[node name="camera" type="Camera3D" parent="."]
+transform = Transform3D(0.674186, -0.364436, 0.642385, 0, 0.869779, 0.493441, -0.738561, -0.332671, 0.586393, 3.52735, 3.72408, 3.47862)
+current = true
+
+[node name="env" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_24ylp")

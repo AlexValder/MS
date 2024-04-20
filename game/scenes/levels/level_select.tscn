@@ -1,6 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c68ad8q0qdqmu"]
+[gd_scene load_steps=7 format=3 uid="uid://c68ad8q0qdqmu"]
 
-[ext_resource type="Script" path="res://scenes/level_select.gd" id="1_aw8vy"]
+[ext_resource type="Script" path="res://scenes/levels/level_select.gd" id="1_aw8vy"]
+[ext_resource type="Script" path="res://scenes/levels/level_metadata.gd" id="2_u6jxe"]
+
+[sub_resource type="Resource" id="Resource_mhh3c"]
+script = ExtResource("2_u6jxe")
+level_name = "TestLevel"
+time = 0
+weather = 0
+path = "res://scenes/levels/base_level.tscn"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcfqr"]
 load_path = "res://.godot/imported/icons.png-9638851efbee5517d4b4cd55f414e20f.ctex"
@@ -17,6 +25,7 @@ region = Rect2(201, 42, 29, 28)
 
 [node name="level_select" type="Node"]
 script = ExtResource("1_aw8vy")
+table = Array[ExtResource("2_u6jxe")]([SubResource("Resource_mhh3c")])
 
 [node name="center" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -31,6 +40,42 @@ layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 3
+
+[node name="level 0" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="level 1" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="level 2" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="level 3" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="level 4" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="level 5" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="level 6" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="level 7" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="level 8" type="Button" parent="center/levels"]
+layout_mode = 2
+text = "Level 1"
 
 [node name="mcont" type="HFlowContainer" parent="."]
 anchors_preset = 15

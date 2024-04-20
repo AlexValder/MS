@@ -53,3 +53,4 @@ mono_crash.*.json
 /.sconsign.dblite
 /extension_api.json
 /game/bin/*.ilk
+/game/scenes/levels/*.tmp

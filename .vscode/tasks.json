@@ -8,10 +8,7 @@
             "group": "build",
             "type": "shell",
             "command": "scons",
-            "args": [
-                // enable for debugging with breakpoints
-                //"dev_build=yes",
-            ],
+            "args": [],
             "problemMatcher": "$msCompile"
         }
     ]

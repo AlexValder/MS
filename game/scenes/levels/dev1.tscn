@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cu33xh01v40ou"]
-
-[ext_resource type="Script" path="res://scenes/levels/dev1.gd" id="1_0dr3w"]
-
-[node name="Dev1" type="Level3D"]
-level_name = "Dev1"
-script = ExtResource("1_0dr3w")
