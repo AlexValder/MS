@@ -54,3 +54,5 @@ mono_crash.*.json
 /extension_api.json
 /game/bin/*.ilk
 /game/scenes/levels/*.tmp
+/game/bin/*.TMP
+/game/addons/limboai/bin/liblimboai.macos.editor.framework/liblimboai.macos.editor

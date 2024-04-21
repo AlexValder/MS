@@ -1,14 +1,80 @@
-[gd_scene load_steps=7 format=3 uid="uid://c68ad8q0qdqmu"]
+[gd_scene load_steps=17 format=3 uid="uid://c68ad8q0qdqmu"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_select.gd" id="1_aw8vy"]
-[ext_resource type="Script" path="res://scenes/levels/level_metadata.gd" id="2_u6jxe"]
+[ext_resource type="Script" path="res://scenes/levels/res/level_metadata.gd" id="2_u6jxe"]
 
 [sub_resource type="Resource" id="Resource_mhh3c"]
 script = ExtResource("2_u6jxe")
-level_name = "TestLevel"
-time = 0
-weather = 0
 path = "res://scenes/levels/base_level.tscn"
+level_name = "TestLevel"
+time = 1
+weather = 1
+
+[sub_resource type="Resource" id="Resource_a01n3"]
+script = ExtResource("2_u6jxe")
+path = "res://scenes/levels/base_level.tscn"
+level_name = "Level 1"
+time = 2
+weather = 2
+
+[sub_resource type="Resource" id="Resource_4ga1v"]
+script = ExtResource("2_u6jxe")
+path = "res://scenes/levels/base_level.tscn"
+level_name = "Level 2"
+time = 1
+weather = 4
+
+[sub_resource type="Resource" id="Resource_7ns0e"]
+script = ExtResource("2_u6jxe")
+path = "res://scenes/levels/base_level.tscn"
+level_name = "Level 3"
+time = 1
+weather = 2
+
+[sub_resource type="Resource" id="Resource_e0ht5"]
+script = ExtResource("2_u6jxe")
+path = "res://scenes/levels/base_level.tscn"
+level_name = "Level 4"
+time = 2
+weather = 1
+
+[sub_resource type="Resource" id="Resource_gm4cf"]
+script = ExtResource("2_u6jxe")
+path = "res://scenes/levels/base_level.tscn"
+level_name = "Level 5"
+time = 2
+weather = 2
+
+[sub_resource type="Resource" id="Resource_tn7tq"]
+script = ExtResource("2_u6jxe")
+path = "res://scenes/levels/base_level.tscn"
+level_name = "Level 6"
+time = 1
+weather = 2
+
+[sub_resource type="Resource" id="Resource_wgf44"]
+script = ExtResource("2_u6jxe")
+path = "res://scenes/levels/base_level.tscn"
+level_name = "Level 7"
+time = 1
+weather = 4
+
+[sub_resource type="Resource" id="Resource_6kbbe"]
+script = ExtResource("2_u6jxe")
+path = "res://scenes/levels/base_level.tscn"
+level_name = "Level 8"
+time = 2
+weather = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_iui7h"]
+font_color = Color(1, 1, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_djgag"]
+font_color = Color(1, 1, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lcfqr"]
 load_path = "res://.godot/imported/icons.png-9638851efbee5517d4b4cd55f414e20f.ctex"
@@ -25,18 +91,97 @@ region = Rect2(201, 42, 29, 28)
 
 [node name="level_select" type="Node"]
 script = ExtResource("1_aw8vy")
-table = Array[ExtResource("2_u6jxe")]([SubResource("Resource_mhh3c")])
+table = Array[ExtResource("2_u6jxe")]([SubResource("Resource_mhh3c"), SubResource("Resource_a01n3"), SubResource("Resource_4ga1v"), SubResource("Resource_7ns0e"), SubResource("Resource_e0ht5"), SubResource("Resource_gm4cf"), SubResource("Resource_tn7tq"), SubResource("Resource_wgf44"), SubResource("Resource_6kbbe")])
 
-[node name="center" type="CenterContainer" parent="."]
+[node name="center" type="HBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 81.0
+offset_right = -81.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="panel" type="Panel" parent="center"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="vbox" type="VBoxContainer" parent="center/panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.5
+anchor_right = 0.7
+anchor_bottom = 0.5
+offset_top = -38.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="hbox" type="HBoxContainer" parent="center/panel/vbox"]
+layout_mode = 2
+alignment = 1
+
+[node name="vbox1" type="VBoxContainer" parent="center/panel/vbox/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="label0" type="Label" parent="center/panel/vbox/hbox/vbox1"]
+layout_mode = 2
+text = "Level:"
+label_settings = SubResource("LabelSettings_iui7h")
+
+[node name="label1" type="Label" parent="center/panel/vbox/hbox/vbox1"]
+layout_mode = 2
+text = "Time:"
+label_settings = SubResource("LabelSettings_djgag")
+
+[node name="label2" type="Label" parent="center/panel/vbox/hbox/vbox1"]
+layout_mode = 2
+text = "Weather:"
+label_settings = SubResource("LabelSettings_djgag")
+
+[node name="vbox2" type="VBoxContainer" parent="center/panel/vbox/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="level_name" type="Label" parent="center/panel/vbox/hbox/vbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "-"
+horizontal_alignment = 2
+
+[node name="time" type="Label" parent="center/panel/vbox/hbox/vbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "-"
+horizontal_alignment = 2
+
+[node name="weather" type="Label" parent="center/panel/vbox/hbox/vbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "-"
+horizontal_alignment = 2
+
+[node name="play" type="Button" parent="center/panel/vbox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+text = "Play
+"
 
 [node name="levels" type="GridContainer" parent="center"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 3
@@ -143,4 +288,5 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_0tbut")
 
+[connection signal="button_up" from="center/panel/vbox/play" to="." method="_on_play_button_up"]
 [connection signal="button_up" from="mcont/exit" to="." method="_on_exit_button_up"]

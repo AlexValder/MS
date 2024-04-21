@@ -1,0 +1,7 @@
+*.dll filter=lfs diff=lfs merge=lfs -text
+*.template_release filter=lfs diff=lfs merge=lfs -text
+*.wasm filter=lfs diff=lfs merge=lfs -text
+*.glb filter=lfs diff=lfs merge=lfs -text
+assets/mannequiny/Azul.material filter=lfs diff=lfs merge=lfs -text
+assets/mannequiny/Blanco.material filter=lfs diff=lfs merge=lfs -text
+assets/mannequiny/Negro.material filter=lfs diff=lfs merge=lfs -text
