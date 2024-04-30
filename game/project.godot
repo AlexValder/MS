@@ -95,6 +95,12 @@ run={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="env_gen"
+3d_physics/layer_2="camera_passable"
+3d_physics/layer_3="player"
+
 [rendering]
 
 textures/lossless_compression/force_png=true

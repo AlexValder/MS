@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu33xh01v40ou"]
+[gd_scene load_steps=17 format=3 uid="uid://cu33xh01v40ou"]
 
 [ext_resource type="Script" path="res://scenes/levels/base_level.gd" id="1_unele"]
 [ext_resource type="PackedScene" uid="uid://batlms262xfw8" path="res://scenes/chars/player/player.tscn" id="2_1pxv4"]
 [ext_resource type="Script" path="res://scenes/levels/res/level_metadata.gd" id="2_sf5q7"]
 [ext_resource type="Texture2D" uid="uid://1yab3guirn5g" path="res://addons/godot-prototype-texture/PNG/checker_black_512x512.png" id="3_6rljn"]
+[ext_resource type="Shader" path="res://assets/shaders/flag.gdshader" id="4_15aj7"]
 [ext_resource type="Environment" uid="uid://wyo68ju33ubj" path="res://scenes/levels/res/env.res" id="4_to1r7"]
 
 [sub_resource type="Resource" id="Resource_u1mox"]
@@ -25,6 +26,38 @@ uv1_scale = Vector3(10, 10, 10)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n7acl"]
 data = PackedVector3Array(25, -25, 0, -25, -25, 0, 25, 25, 0, -25, -25, 0, -25, 25, 0, 25, 25, 0)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_di4qv"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 3.0
+radial_segments = 6
+rings = 1
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7udf7"]
+points = PackedVector3Array(0.0134893, 1.50444, 0.0121893, -0.0131379, -1.50444, -0.0144379, -0.0131379, 1.50444, -0.0144379, 0.0134893, -1.50444, 0.0121893)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1g36l"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rpsts"]
+noise = SubResource("FastNoiseLite_1g36l")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fep3a"]
+render_priority = 0
+shader = ExtResource("4_15aj7")
+shader_parameter/uv_offset_scale = Vector2(-0.1, -0.05)
+shader_parameter/time_scale = Vector2(0.2, 0)
+shader_parameter/face_distortion = 0.1
+shader_parameter/color1 = Color(0.356863, 0.807843, 0.980392, 1)
+shader_parameter/color2 = Color(0.960784, 0.662745, 0.721569, 1)
+shader_parameter/color3 = Color(1, 1, 1, 1)
+shader_parameter/uv_offset_texture = SubResource("NoiseTexture2D_rpsts")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kx7ki"]
+size = Vector2(1.5, 1)
+subdivide_width = 10
+subdivide_depth = 10
+orientation = 1
+
 [node name="level" type="Level3D"]
 level_name = "Level"
 geometry_path = NodePath("geom")
@@ -39,9 +72,28 @@ mesh = SubResource("QuadMesh_tl7p3")
 surface_material_override/0 = SubResource("StandardMaterial3D_3lhqd")
 
 [node name="static" type="StaticBody3D" parent="geom/floor"]
+collision_mask = 4
 
 [node name="shape" type="CollisionShape3D" parent="geom/floor/static"]
 shape = SubResource("ConcavePolygonShape3D_n7acl")
+
+[node name="flag" type="StaticBody3D" parent="geom/floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -6, 1.5)
+collision_layer = 2
+collision_mask = 4
+
+[node name="pole" type="MeshInstance3D" parent="geom/floor/flag"]
+mesh = SubResource("CylinderMesh_di4qv")
+skeleton = NodePath("../..")
+
+[node name="shape" type="CollisionShape3D" parent="geom/floor/flag"]
+shape = SubResource("ConvexPolygonShape3D_7udf7")
+
+[node name="flag" type="MeshInstance3D" parent="geom/floor/flag"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.75, 0.9, 0)
+material_override = SubResource("ShaderMaterial_fep3a")
+cast_shadow = 2
+mesh = SubResource("QuadMesh_kx7ki")
 
 [node name="sun" type="DirectionalLight3D" parent="geom"]
 transform = Transform3D(0.968895, 0.236742, 0.0720813, 0, -0.29127, 0.956641, 0.247473, -0.926885, -0.28221, 0, -11.1937, 0)

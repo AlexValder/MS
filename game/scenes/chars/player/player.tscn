@@ -27,6 +27,8 @@ _data = {
 }
 
 [node name="player" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_cc7ft")
 
 [node name="shape" type="CollisionShape3D" parent="."]
@@ -40,8 +42,10 @@ vertical_joy_sensitivity = 0.1
 
 [node name="spring_arm" type="SpringArm3D" parent="camera"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.2, 0)
+collision_mask = 5
 shape = SubResource("SphereShape3D_52o0q")
 spring_length = 3.0
+margin = 0.1
 
 [node name="c" type="Camera3D" parent="camera/spring_arm"]
 current = true
