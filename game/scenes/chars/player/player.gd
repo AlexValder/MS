@@ -2,10 +2,8 @@ extends CharacterBody3D
 class_name Player
 
 @onready var _camera := $camera as PlayerCamera
-@onready var _model := $mesh as Node3D
+@onready var _model := $model as Node3D
 @onready var _shape := $shape as CollisionShape3D
-
-var camera_standalone := true
 
 
 func look_dir() -> float:
@@ -24,12 +22,13 @@ func rotate_body(angle: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
         var e := event as InputEventMouseMotion
-        if camera_standalone:
-            _camera.rotate_camera_mouse(e)
-            return
-        rotate_y(e.relative.x * 0.01)
+        _camera.rotate_camera_mouse(e)
 
 
 func move(dir: Vector3) -> void:
     velocity = dir
     move_and_slide()
+
+
+func _physics_process(_delta: float) -> void:
+    _camera.rotate_camera()

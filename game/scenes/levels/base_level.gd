@@ -23,7 +23,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
     if event.is_action_pressed("ui_cancel"):
-        quit_to_menu()
+        get_tree().quit()
+        #quit_to_menu()
 
 
 func _setup_metadata(metadata: LevelMetadata) -> void:

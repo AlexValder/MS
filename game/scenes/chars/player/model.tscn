@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c307frw8sw84e"]
+
+[ext_resource type="PackedScene" uid="uid://ce844viykdbe8" path="res://assets/models/model.glb" id="1_xx55d"]
+[ext_resource type="Shader" path="res://scenes/chars/player/model.gdshader" id="2_7qjrt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktj27"]
+render_priority = 0
+shader = ExtResource("2_7qjrt")
+shader_parameter/color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28p5t"]
+render_priority = 0
+shader = ExtResource("2_7qjrt")
+shader_parameter/color = Color(0.548963, 0.548963, 0.548963, 1)
+
+[node name="model" instance=ExtResource("1_xx55d")]
+
+[node name="Beta_Joints" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_ktj27")
+
+[node name="Beta_Surface" parent="Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_28p5t")

@@ -1,1 +1,1 @@
-extends LimboState
+extends "./player_state.gd"

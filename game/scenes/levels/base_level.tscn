@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu33xh01v40ou"]
+[gd_scene load_steps=10 format=3 uid="uid://cu33xh01v40ou"]
 
 [ext_resource type="Script" path="res://scenes/levels/base_level.gd" id="1_unele"]
 [ext_resource type="PackedScene" uid="uid://batlms262xfw8" path="res://scenes/chars/player/player.tscn" id="2_1pxv4"]
 [ext_resource type="Script" path="res://scenes/levels/res/level_metadata.gd" id="2_sf5q7"]
+[ext_resource type="Texture2D" uid="uid://1yab3guirn5g" path="res://addons/godot-prototype-texture/PNG/checker_black_512x512.png" id="3_6rljn"]
 [ext_resource type="Environment" uid="uid://wyo68ju33ubj" path="res://scenes/levels/res/env.res" id="4_to1r7"]
 
 [sub_resource type="Resource" id="Resource_u1mox"]
@@ -15,23 +16,11 @@ weather = 0
 [sub_resource type="QuadMesh" id="QuadMesh_tl7p3"]
 size = Vector2(50, 50)
 
-[sub_resource type="Gradient" id="Gradient_8esf0"]
-colors = PackedColorArray(0, 0.508978, 0.180747, 1, 0, 0.324013, 0.136674, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_75qbj"]
-noise_type = 2
-frequency = 0.0726
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_emgjr"]
-width = 256
-height = 256
-color_ramp = SubResource("Gradient_8esf0")
-noise = SubResource("FastNoiseLite_75qbj")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lhqd"]
 shading_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = SubResource("NoiseTexture2D_emgjr")
+albedo_texture = ExtResource("3_6rljn")
+uv1_scale = Vector3(10, 10, 10)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n7acl"]
 data = PackedVector3Array(25, -25, 0, -25, -25, 0, 25, 25, 0, -25, -25, 0, -25, 25, 0, 25, 25, 0)
@@ -39,7 +28,6 @@ data = PackedVector3Array(25, -25, 0, -25, -25, 0, 25, 25, 0, -25, -25, 0, -25, 
 [node name="level" type="Level3D"]
 level_name = "Level"
 geometry_path = NodePath("geom")
-player_spawn_point = NodePath("player")
 script = ExtResource("1_unele")
 level_metadata = SubResource("Resource_u1mox")
 
