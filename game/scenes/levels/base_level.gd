@@ -5,20 +5,13 @@ class_name BaseLevel
 
 @onready var _env := $env as WorldEnvironment
 
-
 func quit_to_menu() -> void:
     LevelLoader.quit_to_menu()
 
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-    ($%location as Label).text = level_metadata.level_name
-    ($%weather as Label).text = LevelLoader.enum_to_cap_string(
-        LevelMetadata.WEATHER, level_metadata.weather)
-    ($%time as Label).text = LevelLoader.enum_to_cap_string(
-        LevelMetadata.TIME, level_metadata.time)
-
-    _setup_metadata(level_metadata)
+    #_setup_metadata(level_metadata)
 
 
 func _input(event: InputEvent) -> void:
@@ -28,6 +21,13 @@ func _input(event: InputEvent) -> void:
 
 
 func _setup_metadata(metadata: LevelMetadata) -> void:
+    return
+    ($%location as Label).text = level_metadata.level_name
+    ($%weather as Label).text = LevelLoader.enum_to_cap_string(
+        LevelMetadata.WEATHER, level_metadata.weather)
+    ($%time as Label).text = LevelLoader.enum_to_cap_string(
+        LevelMetadata.TIME, level_metadata.time)
+
     var env := _env.environment
 
     match metadata.weather:

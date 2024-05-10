@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://batlms262xfw8"]
+[gd_scene load_steps=22 format=3 uid="uid://batlms262xfw8"]
 
 [ext_resource type="Script" path="res://scenes/chars/player/player.gd" id="1_cc7ft"]
 [ext_resource type="Script" path="res://scenes/chars/player/camera.gd" id="2_24bbx"]
 [ext_resource type="PackedScene" uid="uid://c307frw8sw84e" path="res://scenes/chars/player/model.tscn" id="3_gfoy2"]
 [ext_resource type="Script" path="res://scenes/chars/player/hsm/state_machine.gd" id="3_l03ds"]
+[ext_resource type="Texture2D" uid="uid://biccb33xkaq8j" path="res://assets/textures/flashlight_projector.png" id="4_27s4v"]
 [ext_resource type="Script" path="res://scenes/chars/player/hsm/idle.gd" id="4_i50qs"]
 [ext_resource type="Animation" uid="uid://chbnyhgil52t5" path="res://assets/anim/idle.res" id="4_kymg3"]
 [ext_resource type="Script" path="res://scenes/chars/player/hsm/run.gd" id="5_7pdn8"]
@@ -11,25 +12,84 @@
 [ext_resource type="Animation" uid="uid://dv5sd4lt1iry3" path="res://assets/anim/run.res" id="6_bbgc6"]
 [ext_resource type="Script" path="res://scenes/chars/player/hsm/jump.gd" id="7_l16u7"]
 [ext_resource type="Script" path="res://scenes/chars/player/hsm/walk.gd" id="9_46k02"]
+[ext_resource type="Script" path="res://scenes/chars/player/hsm/fall.gd" id="12_fxqb5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8rvml"]
 radius = 0.257007
 height = 1.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_52o0q"]
-radius = 0.2
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgpuo"]
+shading_mode = 2
+diffuse_mode = 1
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.966845, 0.966844, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sqevi"]
+material = SubResource("StandardMaterial3D_bgpuo")
+radius = 0.05
+height = 0.05
+radial_segments = 6
+rings = 3
+is_hemisphere = true
+
+[sub_resource type="Animation" id="Animation_qewbw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Beta_Surface/flashlight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(9.17449, 16.0067, -133.342)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Beta_Surface/flashlight:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.26102e-08, -9.74965e-09, -0.224938)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iiowh"]
 _data = {
+"RESET": SubResource("Animation_qewbw"),
 "idle": ExtResource("4_kymg3"),
 "run": ExtResource("6_bbgc6"),
 "walk": ExtResource("5_jkv6t")
 }
 
-[node name="player" type="CharacterBody3D"]
+[sub_resource type="LabelSettings" id="LabelSettings_jn5jy"]
+font_size = 24
+font_color = Color(0.989844, 5.48691e-06, 9.62615e-07, 1)
+
+[sub_resource type="GDScript" id="GDScript_vqfyt"]
+script/source = "extends Label
+
+
+func _process(_delta: float) -> void:
+    text = \"%f fps\" % Engine.get_frames_per_second()
+"
+
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("flashlight")]
 collision_layer = 4
 collision_mask = 3
+floor_max_angle = 0.802851
+platform_floor_layers = 4294967283
 script = ExtResource("1_cc7ft")
+flashlight = NodePath("model/Armature/Skeleton3D/Beta_Surface/flashlight/light")
 
 [node name="shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -52,15 +112,116 @@ current = true
 
 [node name="model" parent="." instance=ExtResource("3_gfoy2")]
 
+[node name="Skeleton3D" parent="model/Armature" index="0"]
+bones/0/position = Vector3(0.417312, 2.55577, -99.3179)
+bones/0/rotation = Quaternion(-0.704887, 0.00788422, 0.00962249, 0.709211)
+bones/1/rotation = Quaternion(-0.0499359, 0.0352983, -0.00638591, 0.998108)
+bones/2/rotation = Quaternion(0.0101303, 0.0097035, 0.00178741, 0.9999)
+bones/3/rotation = Quaternion(0.0230238, 0.00969827, 0.0016979, 0.999686)
+bones/4/rotation = Quaternion(-0.0114667, -0.00597739, 0.000134329, 0.999916)
+bones/5/rotation = Quaternion(-0.0367445, -0.040474, -0.0291156, 0.99808)
+bones/7/rotation = Quaternion(-0.552818, 0.512101, -0.568699, -0.329737)
+bones/8/position = Vector3(-1.17427e-06, 10.8382, -3.1949e-05)
+bones/8/rotation = Quaternion(0.325842, -0.0292578, -0.281585, 0.902042)
+bones/9/position = Vector3(-1.88022e-07, 27.8415, 2.81949e-06)
+bones/9/rotation = Quaternion(-2.03251e-07, 0.0687246, -0.232011, 0.970282)
+bones/10/position = Vector3(2.17297e-05, 28.3288, 4.26142e-07)
+bones/10/rotation = Quaternion(-0.0478553, 0.0681221, -0.102373, 0.991256)
+bones/11/position = Vector3(2.68185, 2.46481, 1.57398)
+bones/11/rotation = Quaternion(0.163593, 0.0991152, -0.271914, 0.94312)
+bones/12/position = Vector3(1.33282e-05, 4.18899, 5.56139e-06)
+bones/12/rotation = Quaternion(-0.0107686, -0.0701365, 0.275869, 0.958573)
+bones/13/rotation = Quaternion(-0.126509, -0.0194535, -0.187781, 0.973835)
+bones/14/position = Vector3(-5.35244e-06, 2.57498, -1.61096e-06)
+bones/15/position = Vector3(2.25983, 9.10828, 0.517865)
+bones/15/rotation = Quaternion(0.202478, 0.0119473, 0.0192114, 0.979025)
+bones/16/rotation = Quaternion(0.364946, 3.78044e-07, 0.0297321, 0.930554)
+bones/17/rotation = Quaternion(0.176174, -3.22449e-07, 0.0143521, 0.984254)
+bones/19/rotation = Quaternion(0.314917, 0.00351346, 0.0480659, 0.947895)
+bones/20/position = Vector3(7.40977e-08, 3.7, -1.17571e-06)
+bones/20/rotation = Quaternion(0.339841, -1.70962e-09, 0.0276865, 0.940075)
+bones/21/rotation = Quaternion(0.14251, -6.25e-08, 0.01161, 0.989725)
+bones/22/position = Vector3(-1.81514e-05, 2.94662, 7.50055e-06)
+bones/23/rotation = Quaternion(0.363627, -0.0118144, 0.0722198, 0.928666)
+bones/24/rotation = Quaternion(0.306211, 1.86335e-07, 0.0249469, 0.951637)
+bones/25/rotation = Quaternion(0.16326, -1.2624e-07, 0.0133002, 0.986493)
+bones/26/position = Vector3(-7.29255e-07, 2.63882, -4.03912e-06)
+bones/27/position = Vector3(-3.80628, 8.07666, 0.486699)
+bones/27/rotation = Quaternion(0.388938, 0.0112244, 0.0454845, 0.920072)
+bones/28/rotation = Quaternion(0.339821, 1.51932e-07, 0.0276846, 0.940083)
+bones/29/position = Vector3(9.35651e-07, 2.09999, 2.76924e-06)
+bones/29/rotation = Quaternion(0.239335, -5.70927e-07, 0.0194976, 0.970741)
+bones/30/position = Vector3(-1.91427e-06, 2.11578, 7.2908e-06)
+bones/31/rotation = Quaternion(0.55625, 0.508008, -0.573193, 0.322433)
+bones/32/rotation = Quaternion(0.417785, 0.141805, 0.0206462, 0.897174)
+bones/33/rotation = Quaternion(4.7149e-07, -0.0140772, 0.0475234, 0.998771)
+bones/34/rotation = Quaternion(-0.0257094, 0.164184, 0.0723166, 0.983439)
+bones/35/position = Vector3(-2.68173, 2.46615, 1.57621)
+bones/35/rotation = Quaternion(0.139155, -0.0406794, 0.24715, 0.95807)
+bones/36/rotation = Quaternion(0.0630373, 0.0490726, -0.208897, 0.974669)
+bones/37/position = Vector3(4.00428e-06, 3.41838, -2.20058e-06)
+bones/37/rotation = Quaternion(-0.172672, -0.0532054, 0.191448, 0.964729)
+bones/39/position = Vector3(-2.25986, 9.10932, 0.518042)
+bones/39/rotation = Quaternion(0.274632, -0.0152619, -0.0266733, 0.961058)
+bones/40/position = Vector3(1.92609e-06, 3.69999, 2.28744e-06)
+bones/40/rotation = Quaternion(0.293898, -2.71008e-07, -0.0301173, 0.955362)
+bones/41/rotation = Quaternion(0.194009, -3.94579e-07, -0.0198814, 0.980798)
+bones/42/position = Vector3(1.65776e-06, 2.77485, 3.44808e-06)
+bones/43/position = Vector3(-3.60865e-05, 9.53341, -1.81137e-05)
+bones/43/rotation = Quaternion(0.351671, -0.00202017, -0.0617053, 0.934086)
+bones/44/rotation = Quaternion(0.307131, -1.42981e-07, -0.0314733, 0.951147)
+bones/45/rotation = Quaternion(0.217067, -6.83447e-07, -0.022245, 0.975903)
+bones/47/position = Vector3(1.86508, 9.10454, 0.0430399)
+bones/47/rotation = Quaternion(0.359862, 0.0206132, -0.0916547, 0.928264)
+bones/48/rotation = Quaternion(0.376421, -4.36229e-07, -0.0385743, 0.925645)
+bones/49/rotation = Quaternion(0.174801, -7.92739e-07, -0.0179137, 0.984441)
+bones/50/position = Vector3(-2.24395e-05, 2.64432, 1.26421e-05)
+bones/51/position = Vector3(3.80626, 8.07778, 0.48689)
+bones/51/rotation = Quaternion(0.334527, 0.00106692, -0.0684217, 0.939898)
+bones/52/position = Vector3(-1.70039e-06, 3.6, 2.12089e-06)
+bones/52/rotation = Quaternion(0.277688, -7.4936e-07, -0.0284574, 0.96025)
+bones/53/position = Vector3(1.37629e-06, 2.10001, -2.8389e-06)
+bones/53/rotation = Quaternion(0.205644, 4.62247e-07, -0.0210726, 0.9784)
+bones/54/position = Vector3(3.82464e-06, 2.12551, 2.49488e-06)
+bones/55/rotation = Quaternion(-0.105963, -0.060651, 0.992279, 0.0217947)
+bones/56/rotation = Quaternion(-0.198107, -0.0260425, 0.0300398, 0.979374)
+bones/57/rotation = Quaternion(0.615191, -0.015931, -0.0486679, 0.786713)
+bones/58/rotation = Quaternion(0.433773, -3.358e-08, -7.55863e-08, 0.901022)
+bones/60/rotation = Quaternion(0.0334691, 0.268413, 0.962384, 0.0255303)
+bones/61/rotation = Quaternion(-0.065018, -0.0841166, 0.00804441, 0.9943)
+bones/62/rotation = Quaternion(0.481994, -0.0517327, 0.00748142, 0.874614)
+bones/63/rotation = Quaternion(0.316546, 6.80648e-08, -1.64164e-07, 0.948577)
+
+[node name="flashlight" type="Node3D" parent="model/Armature/Skeleton3D/Beta_Surface" index="0"]
+transform = Transform3D(97.4807, 22.3046, -9.74965e-07, -22.3046, 97.4807, -4.26102e-06, 4.44089e-13, 4.37113e-06, 100, 9.17449, 16.0067, -133.342)
+
+[node name="mesh" type="MeshInstance3D" parent="model/Armature/Skeleton3D/Beta_Surface/flashlight"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 8.74228e-08, -1, 8.74228e-08, -3.82137e-15, 8.74228e-08, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_sqevi")
+
+[node name="light" type="SpotLight3D" parent="model/Armature/Skeleton3D/Beta_Surface/flashlight"]
+transform = Transform3D(0.998948, 0.0453817, -0.00677152, 0.00677124, -0.291766, -0.956467, -0.0453817, 0.955413, -0.291766, 0, 0, 0)
+visible = false
+light_energy = 3.428
+light_indirect_energy = 0.0
+light_projector = ExtResource("4_27s4v")
+light_specular = 0.0
+shadow_enabled = true
+spot_range = 5.9938
+spot_attenuation = 1.23114
+spot_angle = 69.6
+spot_angle_attenuation = 0.574349
+
 [node name="model_anim" type="AnimationPlayer" parent="model"]
 libraries = {
 "": SubResource("AnimationLibrary_iiowh")
 }
 autoplay = "idle"
 
-[node name="state_machine" type="LimboHSM" parent="." node_paths=PackedStringArray("player")]
+[node name="state_machine" type="LimboHSM" parent="." node_paths=PackedStringArray("player", "label")]
 script = ExtResource("3_l03ds")
 player = NodePath("..")
+label = NodePath("../HUD/state")
 
 [node name="idle" type="LimboState" parent="state_machine" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_i50qs")
@@ -87,4 +248,32 @@ script = ExtResource("7_l16u7")
 animation_player = NodePath("../../model/model_anim")
 animation = &"jump"
 
+[node name="fall" type="LimboState" parent="state_machine"]
+script = ExtResource("12_fxqb5")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="state" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = 10.0
+offset_right = 35.0
+offset_bottom = 44.0
+grow_horizontal = 2
+text = "STATE"
+label_settings = SubResource("LabelSettings_jn5jy")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="fps" type="Label" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = SubResource("GDScript_vqfyt")
+
 [connection signal="ready" from="." to="state_machine" method="setup_state_machine"]
+[connection signal="active_state_changed" from="state_machine" to="state_machine" method="_on_active_state_changed"]
+
+[editable path="model"]

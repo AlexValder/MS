@@ -1,1 +1,1 @@
-extends "./player_state.gd"
+extends "res://scenes/chars/player/hsm/player_state.gd"

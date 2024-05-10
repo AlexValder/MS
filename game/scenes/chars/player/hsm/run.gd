@@ -1,4 +1,4 @@
-extends "./moving.gd"
+extends "res://scenes/chars/player/hsm/moving.gd"
 
 
 func _update(delta: float) -> void:

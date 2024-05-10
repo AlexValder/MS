@@ -2,28 +2,30 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1m7iylytawku"
-path.s3tc="res://.godot/imported/grid_cyan_512x512.png-14dd12551e8d9f300ec96bfbf31a4ca8.s3tc.ctex"
+uid="uid://ckm0yego3lrdm"
+path="res://.godot/imported/plant_pot_pot.png-83de5ed4eea7275157d9e39fa6c70cf1.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
+}
+generator_parameters={
+"md5": "c1b38f589aa842992299b61781dc0521"
 }
 
 [deps]
 
-source_file="res://addons/godot-prototype-texture/PNG/grid_cyan_512x512.png"
-dest_files=["res://.godot/imported/grid_cyan_512x512.png-14dd12551e8d9f300ec96bfbf31a4ca8.s3tc.ctex"]
+source_file="res://assets/models/plant_pot_pot.png"
+dest_files=["res://.godot/imported/plant_pot_pot.png-83de5ed4eea7275157d9e39fa6c70cf1.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
-mipmaps/limit=-1
+mipmaps/limit=1
 roughness/mode=0
 roughness/src_normal=""
 process/fix_alpha_border=true

@@ -10,3 +10,4 @@ assets/mannequiny/Negro.material filter=lfs diff=lfs merge=lfs -text
 assets/anim/idle.res filter=lfs diff=lfs merge=lfs -text
 assets/anim/run.res filter=lfs diff=lfs merge=lfs -text
 assets/anim/walk.res filter=lfs diff=lfs merge=lfs -text
+env.res filter=lfs diff=lfs merge=lfs -text

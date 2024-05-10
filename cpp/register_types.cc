@@ -14,8 +14,8 @@ void initialize_module(godot::ModuleInitializationLevel p_level)
         return;
     }
 
-    godot::ClassDB::register_class<godot::avalder::Level3D>();
-    godot::ClassDB::register_class<godot::avalder::Spawnpoint>();
+    // godot::ClassDB::register_class<godot::avalder::Level3D>();
+    // godot::ClassDB::register_class<godot::avalder::Spawnpoint>();
 }
 
 void uninitialize_module(godot::ModuleInitializationLevel p_level)

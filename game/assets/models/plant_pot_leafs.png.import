@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1m7iylytawku"
-path.s3tc="res://.godot/imported/grid_cyan_512x512.png-14dd12551e8d9f300ec96bfbf31a4ca8.s3tc.ctex"
+uid="uid://d3kpxxmvlqyu5"
+path.s3tc="res://.godot/imported/plant_pot_leafs.png-4e9ee58a9c37bfb0d344a58ad9673581.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "65558e5c0db563e0cbb0d94df5df7165"
+}
 
 [deps]
 
-source_file="res://addons/godot-prototype-texture/PNG/grid_cyan_512x512.png"
-dest_files=["res://.godot/imported/grid_cyan_512x512.png-14dd12551e8d9f300ec96bfbf31a4ca8.s3tc.ctex"]
+source_file="res://assets/models/plant_pot_leafs.png"
+dest_files=["res://.godot/imported/plant_pot_leafs.png-4e9ee58a9c37bfb0d344a58ad9673581.s3tc.ctex"]
 
 [params]
 

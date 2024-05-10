@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://cy5i68jnpkkna"]
+
+[ext_resource type="Script" path="res://scenes/props/flag.gd" id="1_5kxrp"]
+[ext_resource type="Shader" path="res://assets/shaders/flag.gdshader" id="1_oh80c"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7udf7"]
+points = PackedVector3Array(0.0134893, 1.50444, 0.0121893, -0.0131379, -1.50444, -0.0144379, -0.0131379, 1.50444, -0.0144379, 0.0134893, -1.50444, 0.0121893)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_di4qv"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 3.0
+radial_segments = 6
+rings = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ibh2h"]
+noise_type = 4
+frequency = 0.0198
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7j5ba"]
+noise = SubResource("FastNoiseLite_ibh2h")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fep3a"]
+render_priority = 0
+shader = ExtResource("1_oh80c")
+shader_parameter/uv_offset_scale = Vector2(-0.2, -0.1)
+shader_parameter/time_scale = Vector2(0.3, 0)
+shader_parameter/face_distortion = 0.5
+shader_parameter/uv_offset_texture = SubResource("NoiseTexture2D_7j5ba")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kx7ki"]
+size = Vector2(1.5, 1)
+subdivide_width = 3
+subdivide_depth = 3
+orientation = 1
+
+[node name="flag" type="Node3D"]
+script = ExtResource("1_5kxrp")
+_mesh_path = NodePath("static/flag")
+
+[node name="static" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+collision_layer = 2
+collision_mask = 4
+
+[node name="shape" type="CollisionShape3D" parent="static"]
+shape = SubResource("ConvexPolygonShape3D_7udf7")
+
+[node name="pole" type="MeshInstance3D" parent="static"]
+mesh = SubResource("CylinderMesh_di4qv")
+skeleton = NodePath("../..")
+
+[node name="flag" type="MeshInstance3D" parent="static"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.75, 0.9, 0)
+material_override = SubResource("ShaderMaterial_fep3a")
+cast_shadow = 2
+mesh = SubResource("QuadMesh_kx7ki")

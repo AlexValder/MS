@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ylbv87m2s40j"]
+
+[ext_resource type="Texture2D" uid="uid://dywsftqij65ud" path="res://addons/godot-prototype-texture/PNG/logo_pink_512x512.png" id="1_wfdgg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ti7dd"]
+rough = true
+bounce = 0.55
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqk7b"]
+shading_mode = 2
+diffuse_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_wfdgg")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_qq4u3"]
+radius = 0.2
+height = 0.4
+radial_segments = 10
+rings = 5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iix5s"]
+radius = 0.2
+
+[node name="ball" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 15
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_ti7dd")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_yqk7b")
+mesh = SubResource("SphereMesh_qq4u3")
+skeleton = NodePath("../..")
+
+[node name="shape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_iix5s")
