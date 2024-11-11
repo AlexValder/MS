@@ -30,6 +30,16 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
+"materials": {
+"leafs2": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/models/leafs2.tres"
+},
+"pot": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/models/pot.tres"
+}
+},
 "nodes": {
 "PATH:pot": {
 "generate/physics": true,
